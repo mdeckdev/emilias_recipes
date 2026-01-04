@@ -22,7 +22,8 @@ export function generateStaticParams() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50 pb-8">
       <div className="bg-gradient-to-r from-amber-100 to-orange-100 p-6 shadow-lg">
-        <Link href="/" className="flex items-center gap-2 text-amber-800 mb-4">
+          <Link   href={`/?view=recipes&cat=${recipe.category}`}
+          className="flex items-center gap-2 text-amber-800 mb-4">
           <ArrowLeft size={20} />
           Back
         </Link>

@@ -203,15 +203,20 @@ const EmiliaRecipeBook = () => {
 
         <div className="p-4 max-w-2xl mx-auto space-y-4">
             {/* 🔍 SEARCH INPUT — ADD THIS BLOCK */}
-            <div>
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search recipes or ingredients…"
-                className="w-full rounded-lg border-2 border-amber-200 bg-white px-4 py-2 text-sm text-gray-900 placeholder:text-gray-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-300"
-              />
-            </div>
+          <div className="relative">
+            <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-amber-500">
+              🔍
+            </span>
+
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search recipes or ingredients…"
+              className="w-full rounded-full bg-white pl-12 pr-4 py-3 text-base text-gray-900 placeholder:text-gray-500 shadow-md ring-1 ring-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-300"
+            />
+          </div>
+
             <div className="flex items-center justify-between text-xs">
               <p className="text-gray-700">
                 {query
