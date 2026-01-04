@@ -1,0 +1,222 @@
+// src/lib/data/recipes.ts
+
+export type CategoryId =
+  | "appetizers"
+  | "soups"
+  | "mains"
+  | "sides"
+  | "desserts"
+  | "breads";
+
+export type Recipe = {
+  id: number;
+  name: string;
+  subtitle: string;
+  category: CategoryId;
+  emoji: string;
+  prepTime: string;
+  cookTime: string;
+  servings: string;
+  ingredients: string[];
+  instructions: string[];
+  memory: string;
+};
+
+export const recipes: Recipe[] = [
+  {
+    id: 1,
+    name: "Sarmale",
+    subtitle: "Stuffed cabbage like at Christmas",
+    category: "mains",
+    emoji: "🥬",
+    prepTime: "45 min",
+    cookTime: "2.5 hours",
+    servings: "8-10",
+    ingredients: [
+      "1 large head of cabbage",
+      "500g ground pork",
+      "250g ground beef",
+      "1 cup rice",
+      "2 onions finely chopped",
+      "3 tbsp tomato paste",
+      "500ml sauerkraut juice",
+      "Salt pepper paprika",
+      "Fresh dill",
+      "Bay leaves",
+    ],
+    instructions: [
+      "Carefully remove cabbage leaves and blanch in boiling water until soft",
+      "Mix ground meats with rice onions and seasonings",
+      "Place a spoonful of filling on each cabbage leaf and roll tightly",
+      "Layer sauerkraut on bottom of large pot",
+      "Arrange sarmale in layers adding bay leaves between",
+      "Cover with sauerkraut juice and water",
+      "Simmer on low heat for 2.5 hours",
+      "Serve hot with fresh dill and sour cream",
+    ],
+    memory:
+      "Every Christmas Eve Emilia would wake up at dawn to start making sarmale. She said the secret was patience and stirring with love.",
+  },
+  {
+    id: 2,
+    name: "Cozonac",
+    subtitle: "Sweet bread for celebrations",
+    category: "breads",
+    emoji: "🍞",
+    prepTime: "1 hour",
+    cookTime: "45 min",
+    servings: "12",
+    ingredients: [
+      "500g flour",
+      "250ml warm milk",
+      "100g butter",
+      "3 eggs",
+      "150g sugar",
+      "25g fresh yeast",
+      "200g ground walnuts",
+      "100g cocoa powder",
+      "Vanilla extract",
+      "Pinch of salt",
+    ],
+    instructions: [
+      "Dissolve yeast in warm milk with a teaspoon of sugar",
+      "Mix flour eggs butter sugar and salt into a soft dough",
+      "Knead for 10 minutes until elastic",
+      "Let rise in warm place for 1 hour",
+      "Mix walnuts cocoa and sugar for filling",
+      "Roll out dough spread filling and roll up",
+      "Place in loaf pan and let rise 30 minutes",
+      "Bake at 180C for 45 minutes until golden",
+    ],
+    memory:
+      "Emilia always said a celebration without cozonac is like a day without sunshine. She would braid the dough with such care.",
+  },
+  {
+    id: 3,
+    name: "Mamaliga cu Branza",
+    subtitle: "Polenta with cheese",
+    category: "sides",
+    emoji: "🧈",
+    prepTime: "10 min",
+    cookTime: "20 min",
+    servings: "4",
+    ingredients: [
+      "300g cornmeal",
+      "1L water",
+      "1 tsp salt",
+      "200g fresh sheep cheese or feta",
+      "Sour cream",
+      "Butter",
+    ],
+    instructions: [
+      "Bring salted water to boil",
+      "Gradually add cornmeal while stirring constantly",
+      "Cook on low heat for 15-20 minutes stirring often",
+      "When thick and pulling away from pot it is ready",
+      "Serve hot with crumbled cheese on top",
+      "Add a dollop of sour cream and butter",
+    ],
+    memory:
+      "This was Emilias go-to comfort food. She said it reminded her of simple times with her grandmother in the countryside.",
+  },
+  {
+    id: 4,
+    name: "Ciorba de Burta",
+    subtitle: "Tripe soup with garlic sauce",
+    category: "soups",
+    emoji: "🍜",
+    prepTime: "30 min",
+    cookTime: "2 hours",
+    servings: "6",
+    ingredients: [
+      "500g beef tripe",
+      "2 carrots",
+      "1 onion",
+      "2 tbsp flour",
+      "200ml sour cream",
+      "4 garlic cloves",
+      "Vinegar",
+      "Salt pepper",
+      "Fresh parsley",
+    ],
+    instructions: [
+      "Clean and boil tripe until tender about 2 hours",
+      "Slice tripe into thin strips",
+      "Make a roux with flour and butter",
+      "Add tripe broth gradually to roux",
+      "Add sliced tripe and vegetables",
+      "Mix sour cream with crushed garlic",
+      "Add cream mixture to soup",
+      "Season with vinegar salt and pepper",
+      "Garnish with fresh parsley",
+    ],
+    memory:
+      "Emilia made this every New Years Day. She said it was the best remedy for celebration fatigue!",
+  },
+  {
+    id: 5,
+    name: "Salata de Boeuf",
+    subtitle: "Romanian beef salad",
+    category: "appetizers",
+    emoji: "🥗",
+    prepTime: "40 min",
+    cookTime: "1 hour",
+    servings: "8",
+    ingredients: [
+      "500g beef",
+      "4 potatoes",
+      "3 carrots",
+      "4 pickles",
+      "1 cup peas",
+      "3 eggs",
+      "Mayonnaise",
+      "Salt pepper",
+      "Mustard",
+    ],
+    instructions: [
+      "Boil beef potatoes carrots and eggs",
+      "Let everything cool completely",
+      "Dice all ingredients into small cubes",
+      "Mix vegetables and meat in large bowl",
+      "Add mayonnaise and mustard to taste",
+      "Season with salt and pepper",
+      "Refrigerate for at least 2 hours",
+      "Garnish before serving",
+    ],
+    memory:
+      "No Romanian celebration was complete without this. Emilia would make huge bowls for family gatherings.",
+  },
+  {
+    id: 6,
+    name: "Papanasi",
+    subtitle: "Fried doughnuts with sweet cheese",
+    category: "desserts",
+    emoji: "🍩",
+    prepTime: "30 min",
+    cookTime: "20 min",
+    servings: "6",
+    ingredients: [
+      "500g cottage cheese",
+      "2 eggs",
+      "150g flour",
+      "50g sugar",
+      "1 tsp baking powder",
+      "Oil for frying",
+      "Sour cream",
+      "Berry jam",
+      "Powdered sugar",
+    ],
+    instructions: [
+      "Mix cottage cheese eggs sugar and flour",
+      "Add baking powder and knead into soft dough",
+      "Form into round patties with smaller balls on top",
+      "Heat oil to 170C",
+      "Fry until golden brown on both sides",
+      "Drain on paper towels",
+      "Top with sour cream and jam",
+      "Dust with powdered sugar",
+    ],
+    memory:
+      "Emilia made these on special Sundays. We would all fight over who got the extra ones!",
+  },
+];
