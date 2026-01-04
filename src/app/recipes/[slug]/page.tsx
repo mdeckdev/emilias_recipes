@@ -78,14 +78,15 @@ export function generateStaticParams() {
         {/* INGREDIENTS */}
         <div className="bg-white rounded-lg shadow-md p-4 border-2 border-amber-200">
           <h3 className="text-lg font-serif text-amber-900 mb-3">Ingredients</h3>
-          <ul className="space-y-2">
+          <ul className="list-disc list-outside pl-5 space-y-2 text-gray-700">
             {recipe.ingredients.map((ing, i) => (
-              <li key={i} className="flex items-start gap-2 text-gray-700">
-                <span className="text-amber-600 mt-1">•</span>
-                <span className="text-sm">{ing}</span>
+              <li key={i} className="text-sm leading-7">
+                {ing}
               </li>
             ))}
           </ul>
+
+
         </div>
 
         {/* INSTRUCTIONS */}

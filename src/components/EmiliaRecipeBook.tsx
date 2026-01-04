@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter  } from "next/navigation";
-import { Book, Heart, Image as ImageIcon, ChefHat, Clock, Users, ArrowLeft } from "lucide-react";
+import { Book, Heart, Image as ImageIcon, ChefHat, Clock, Users, ArrowLeft, Soup, BookHeart } from "lucide-react";
 import { recipes } from "@/lib/data/recipes";
 import { stories } from "@/lib/data/stories";
 import { photos } from "@/lib/data/photos";
@@ -86,7 +86,7 @@ const EmiliaRecipeBook = () => {
             >
               <div className="flex items-center gap-4">
                 <div className="bg-orange-100 p-4 rounded-full">
-                  <Book size={32} className="text-orange-600" />
+                  <Soup size={32} className="text-orange-600" />
                 </div>
                 <div className="text-left flex-1">
                   <h3 className="text-xl font-serif text-amber-900 mb-1">Browse Recipes</h3>
@@ -114,7 +114,7 @@ const EmiliaRecipeBook = () => {
             >
               <div className="flex items-center gap-4">
                 <div className="bg-amber-100 p-4 rounded-full">
-                  <Heart size={32} className="text-amber-600" />
+                  <BookHeart size={32} className="text-amber-600" />
                 </div>
                 <div className="text-left flex-1">
                   <h3 className="text-xl font-serif text-amber-900 mb-1">Family Stories</h3>
