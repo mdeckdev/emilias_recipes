@@ -6,6 +6,10 @@ export const recipes: Recipe[] = [
   {
     id: 1,
     slug: "sarmale",
+    image: {
+    src: "/images/recipes/sarmale.webp",
+    alt: "Sarmale (stuffed cabbage rolls)",
+    },
     name: "Sarmale",
     subtitle: "Stuffed cabbage like at Christmas",
     category: "mains",
@@ -41,6 +45,10 @@ export const recipes: Recipe[] = [
   {
     id: 2,
     slug: "cozonac",
+    image: {
+    src: "/images/recipes/cozonac.webp",
+    alt: "Cozonac (sweet bread)",
+    },    
     name: "Cozonac",
     subtitle: "Sweet bread for celebrations",
     category: "breads",
@@ -76,6 +84,10 @@ export const recipes: Recipe[] = [
   {
     id: 3,
     slug: "mamaliga-cu-branza",
+    image: {
+    src: "/images/recipes/mamaliga-cu-branza.webp",
+    alt: "Mamaliga cu Branza (Polenta with cheese)",
+    },
     name: "Mamaliga cu Branza",
     subtitle: "Polenta with cheese",
     category: "sides",
@@ -105,6 +117,10 @@ export const recipes: Recipe[] = [
   {
     id: 4,
     slug: "ciorba-de-burta",
+    image: {
+    src: "/images/recipes/ciorba-de-burta.webp",
+    alt: "Ciorba de Burta (Tripe soup with garlic sauce)",
+    },
     name: "Ciorba de Burta",
     subtitle: "Tripe soup with garlic sauce",
     category: "soups",
@@ -140,6 +156,10 @@ export const recipes: Recipe[] = [
   {
     id: 5,
     slug: "salata-de-boeuf",
+    image: {
+    src: "/images/recipes/salata-de-boeuf.webp",
+    alt: "Salata de Boeuf (Romanian beef salad)",
+    },
     name: "Salata de Boeuf",
     subtitle: "Romanian beef salad",
     category: "appetizers",
@@ -174,6 +194,10 @@ export const recipes: Recipe[] = [
   {
     id: 6,
     slug: "papanasi",
+    image: {
+    src: "/images/recipes/papanasi.webp",
+    alt: "Papanasi (fried doughnuts with sweet cheese)",
+    },
     name: "Papanasi",
     subtitle: "Fried doughnuts with sweet cheese",
     category: "desserts",

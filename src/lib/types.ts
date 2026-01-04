@@ -18,6 +18,10 @@ export type CategoryId =
 export type Recipe = {
   id: number;
   slug: string;
+  image: {
+    src: string;     // e.g. "/images/recipes/sarmale.webp"
+    alt: string;
+  };
   name: string;
   subtitle: string;
   category: CategoryId;

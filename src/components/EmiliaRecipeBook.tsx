@@ -3,12 +3,13 @@
 import React from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Book, Heart, Image, ChefHat, Clock, Users, ArrowLeft } from "lucide-react";
-
+import { Book, Heart, Image as ImageIcon, ChefHat, Clock, Users, ArrowLeft } from "lucide-react";
 import { recipes } from "@/lib/data/recipes";
 import { stories } from "@/lib/data/stories";
 import { photos } from "@/lib/data/photos";
 import type { CategoryId } from "@/lib/types";
+import Image from "next/image";
+
 
 type View = "home" | "categories" | "recipes" | "stories" | "story" | "gallery";
 
@@ -95,7 +96,7 @@ const EmiliaRecipeBook = () => {
             >
               <div className="flex items-center gap-4">
                 <div className="bg-orange-100 p-4 rounded-full">
-                  <Image size={32} className="text-orange-600" />
+                  <ImageIcon size={32} className="text-orange-600" />
                 </div>
                 <div className="text-left flex-1">
                   <h3 className="text-xl font-serif text-amber-900 mb-1">Photo Gallery</h3>
@@ -173,14 +174,23 @@ const EmiliaRecipeBook = () => {
 
         <div className="p-4 max-w-2xl mx-auto space-y-4">
           {recipesToShow.map((recipe) => (
-            <div
-              key={recipe.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200"
-            >
-              <div className="flex items-center justify-center h-32 bg-gradient-to-br from-orange-50 to-amber-50">
-                <div className="text-5xl">{recipe.emoji}</div>
-              </div>
-              <div className="p-4">
+          <div
+            key={recipe.id}
+            className="group bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200"
+          >
+            <div className="relative h-56 bg-gradient-to-br from-orange-50 to-amber-50">
+              <Image
+                src={recipe.image.src}
+                alt={recipe.image.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 800px"
+                className="object-cover transition-transform duration-300 md:group-hover:scale-105 md:group-hover:brightness-105"
+                loading="lazy"
+              />
+            </div>
+
+            <div className="p-4">
+
                 <h3 className="text-xl font-serif text-amber-900 mb-1">{recipe.name}</h3>
                 <p className="text-sm text-amber-700 mb-2">{recipe.subtitle}</p>
                 <Link

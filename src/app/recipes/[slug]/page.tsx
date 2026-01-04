@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { Clock, Users, Heart, ArrowLeft } from "lucide-react";
 
 import { recipes } from "@/lib/data/recipes";
+import Image from "next/image";
+
 
 export function generateStaticParams() {
   return recipes.map((r) => ({ slug: r.slug }));
@@ -28,13 +30,23 @@ export function generateStaticParams() {
         <p className="text-sm text-amber-700">{recipe.subtitle}</p>
       </div>
 
-      <div className="p-4 max-w-2xl mx-auto space-y-4">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200">
+              <div className="p-4 max-w-2xl mx-auto space-y-4">
+        {/* HERO IMAGE CARD */}
         <div className="bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200">
-          <div className="flex items-center justify-center h-48 bg-gradient-to-br from-orange-50 to-amber-50">
-            <div className="text-7xl">{recipe.emoji}</div>
+          <div className="relative h-48 sm:h-56 bg-gradient-to-br from-orange-50 to-amber-50">
+            <Image
+              src={recipe.image.src}
+              alt={recipe.image.alt}
+              fill
+              sizes="(max-width: 768px) 100vw, 672px"
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
 
+        {/* STATS */}
         <div className="bg-white rounded-lg shadow-md p-4 border-2 border-amber-200">
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
@@ -55,6 +67,7 @@ export function generateStaticParams() {
           </div>
         </div>
 
+        {/* INGREDIENTS */}
         <div className="bg-white rounded-lg shadow-md p-4 border-2 border-amber-200">
           <h3 className="text-lg font-serif text-amber-900 mb-3">Ingredients</h3>
           <ul className="space-y-2">
@@ -67,6 +80,7 @@ export function generateStaticParams() {
           </ul>
         </div>
 
+        {/* INSTRUCTIONS */}
         <div className="bg-white rounded-lg shadow-md p-4 border-2 border-amber-200">
           <h3 className="text-lg font-serif text-amber-900 mb-3">Instructions</h3>
           <ol className="space-y-3">
@@ -81,6 +95,7 @@ export function generateStaticParams() {
           </ol>
         </div>
 
+        {/* MEMORY */}
         <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-lg shadow-md p-4 border-2 border-amber-200">
           <div className="flex items-center gap-2 mb-2">
             <Heart size={20} className="text-red-500" />
@@ -88,6 +103,7 @@ export function generateStaticParams() {
           </div>
           <p className="text-sm text-gray-700 italic">{recipe.memory}</p>
         </div>
+      </div>
       </div>
     </div>
   );
