@@ -9,13 +9,19 @@ import { stories } from "@/lib/data/stories";
 import { photos } from "@/lib/data/photos";
 import type { CategoryId } from "@/lib/types";
 import Image from "next/image";
+import FavoriteButton from "@/components/FavoriteButton";
+import { useFavorites } from "@/lib/favorites";
 
 
-type View = "home" | "categories" | "recipes" | "stories" | "story" | "gallery";
+
+
+type View = "home" | "categories" | "recipes" | "stories" | "story" | "gallery" | "favorites";
 
 const EmiliaRecipeBook = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const favorites = useFavorites();
+
 
   const query = searchParams.get("q") ?? "";
 
@@ -88,7 +94,20 @@ const EmiliaRecipeBook = () => {
                 </div>
               </div>
             </Link>
-
+            <Link
+              href="/?view=favorites"
+              className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-amber-200 block"
+            >
+              <div className="flex items-center gap-4">
+                <div className="bg-rose-100 p-4 rounded-full">
+                  <Heart size={32} className="text-rose-600" />
+                </div>
+                <div className="text-left flex-1">
+                  <h3 className="text-xl font-serif text-amber-900 mb-1">Favorites</h3>
+                  <p className="text-sm text-gray-600">Your saved recipes</p>
+                </div>
+              </div>
+            </Link> 
             <Link
               href="/?view=stories"
               className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-amber-200 block"
@@ -103,7 +122,6 @@ const EmiliaRecipeBook = () => {
                 </div>
               </div>
             </Link>
-
             <Link
               href="/?view=gallery"
               className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-amber-200 block"
@@ -162,6 +180,92 @@ const EmiliaRecipeBook = () => {
       </div>
     );
   }
+
+  
+  if (currentView === "favorites") {
+  const { slugs, clearFavorites } = favorites;
+  const favRecipes = recipes.filter((r) => slugs.includes(r.slug));
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50">
+      <div className="bg-gradient-to-r from-amber-100 to-orange-100 p-6 shadow-lg">
+        <Link href="/?view=home" className="flex items-center gap-2 text-amber-800 mb-4">
+          <ArrowLeft size={20} />
+          Back
+        </Link>
+
+        <div className="flex items-center gap-3">
+          <span className="text-4xl">⭐</span>
+          <div>
+            <h1 className="text-2xl font-serif text-amber-900">Favorites</h1>
+            <p className="text-sm text-amber-700">{favRecipes.length} saved recipes</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="p-4 max-w-2xl mx-auto space-y-4">
+        {favRecipes.length === 0 ? (
+          <div className="bg-white rounded-lg shadow-md p-4 border-2 border-amber-200 text-center">
+            <p className="text-sm text-gray-800 mb-2">No favorites yet.</p>
+            <p className="text-xs text-gray-600">
+              Tap the ❤️ on a recipe card to save it here.
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="flex justify-end">
+              <button
+                onClick={clearFavorites}
+                className="text-sm text-amber-800 underline underline-offset-2"
+              >
+                Clear all
+              </button>
+            </div>
+
+            {favRecipes.map((recipe) => (
+              <div
+                key={recipe.id}
+                className="group bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200"
+              >
+                <div className="relative h-56 bg-gradient-to-br from-orange-50 to-amber-50">
+                  <Image
+                    src={recipe.image.src}
+                    alt={recipe.image.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    className="object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-3 right-3">
+                    <FavoriteButton
+                      slug={recipe.slug}
+                      isFavorite={favorites.isFavorite(recipe.slug)}
+                      onToggle={favorites.toggleFavorite}
+                      className="w-10 h-10"
+                    />
+
+                  </div>
+                </div>
+
+                <div className="p-4">
+                  <h3 className="text-xl font-serif text-amber-900 mb-1">{recipe.name}</h3>
+                  <p className="text-sm text-amber-700 mb-2">{recipe.subtitle}</p>
+                  <Link
+                    href={`/recipes/${recipe.slug}`}
+                    className="block w-full bg-amber-600 text-white py-2 rounded-lg hover:bg-amber-700 text-center"
+                  >
+                    View Recipe
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+    </div>
+  );
+  }
+
 
   if (currentView === "recipes") {
     const recipesInCategory = selectedCategory
@@ -239,6 +343,15 @@ const EmiliaRecipeBook = () => {
                 className="object-cover transition-transform duration-300 md:group-hover:scale-105 md:group-hover:brightness-105"
                 loading="lazy"
               />
+                <div className="absolute top-3 right-3">
+                  <FavoriteButton
+                    slug={recipe.slug}
+                    isFavorite={favorites.isFavorite(recipe.slug)}
+                    onToggle={favorites.toggleFavorite}
+                    className="w-10 h-10"
+                  />
+
+                </div>
             </div>
 
             <div className="p-4">
@@ -278,6 +391,7 @@ const EmiliaRecipeBook = () => {
       </div>
     );
   }
+
 
   if (currentView === "stories") {
     return (
@@ -356,6 +470,7 @@ const EmiliaRecipeBook = () => {
     );
   }
 
+
   if (currentView === "gallery") {
     return (
       <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50">
@@ -389,6 +504,7 @@ const EmiliaRecipeBook = () => {
       </div>
     );
   }
+
 
   return null;
 };

@@ -4,6 +4,8 @@ import { Clock, Users, Heart, ArrowLeft } from "lucide-react";
 
 import { recipes } from "@/lib/data/recipes";
 import Image from "next/image";
+import RecipeFavoriteClient from "@/components/RecipeFavoriteClient";
+
 
 
 export function generateStaticParams() {
@@ -27,25 +29,30 @@ export function generateStaticParams() {
           <ArrowLeft size={20} />
           Back
         </Link>
+        
         <h1 className="text-2xl font-serif text-amber-900">{recipe.name}</h1>
         <p className="text-sm text-amber-700">{recipe.subtitle}</p>
+        
       </div>
 
-      <div className="bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200">
-              <div className="p-4 max-w-2xl mx-auto space-y-4">
+      <div className="p-4 max-w-2xl mx-auto space-y-4">
         {/* HERO IMAGE CARD */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200">
-          <div className="relative h-48 sm:h-56 bg-gradient-to-br from-orange-50 to-amber-50">
-            <Image
-              src={recipe.image.src}
-              alt={recipe.image.alt}
-              fill
-              sizes="(max-width: 768px) 100vw, 672px"
-              className="object-cover"
-              priority
-            />
+      <div className="bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200">
+        <div className="relative h-48 sm:h-56 bg-gradient-to-br from-orange-50 to-amber-50">
+          <Image
+            src={recipe.image.src}
+            alt={recipe.image.alt}
+            fill
+            sizes="(max-width: 768px) 100vw, 672px"
+            className="object-cover"
+            priority
+          />
+
+          <div className="absolute top-3 right-3">
+            <RecipeFavoriteClient slug={recipe.slug} />
           </div>
         </div>
+      </div>
 
         {/* STATS */}
         <div className="bg-white rounded-lg shadow-md p-4 border-2 border-amber-200">
@@ -106,6 +113,6 @@ export function generateStaticParams() {
         </div>
       </div>
       </div>
-    </div>
+    
   );
 }
