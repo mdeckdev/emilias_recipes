@@ -1,5 +1,10 @@
+import { Suspense } from "react";
 import EmiliaRecipeBook from "@/components/EmiliaRecipeBook";
 
 export default function Page() {
-  return <EmiliaRecipeBook />;
+  return (
+    <Suspense fallback={<div />}>
+      <EmiliaRecipeBook />
+    </Suspense>
+  );
 }
