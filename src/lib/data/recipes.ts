@@ -1,26 +1,6 @@
+
 // src/lib/data/recipes.ts
-
-export type CategoryId =
-  | "appetizers"
-  | "soups"
-  | "mains"
-  | "sides"
-  | "desserts"
-  | "breads";
-
-export type Recipe = {
-  id: number;
-  name: string;
-  subtitle: string;
-  category: CategoryId;
-  emoji: string;
-  prepTime: string;
-  cookTime: string;
-  servings: string;
-  ingredients: string[];
-  instructions: string[];
-  memory: string;
-};
+import type { Recipe } from "@/lib/types";
 
 export const recipes: Recipe[] = [
   {

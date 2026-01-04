@@ -1,21 +1,14 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Book, Heart, Image, ChefHat, Clock, Users, ArrowLeft } from 'lucide-react';
-import { recipes, type Recipe, type CategoryId } from "@/lib/data/recipes";
-import { stories, type Story } from "@/lib/data/stories";
-import { photos, type Photo } from "@/lib/data/photos";
+import React, { useState } from "react";
+import { Book, Heart, Image, ChefHat, Clock, Users, ArrowLeft } from "lucide-react";
+import { recipes } from "@/lib/data/recipes";
+import { stories } from "@/lib/data/stories";
+import { photos } from "@/lib/data/photos";
+import type { View, Recipe, Story, CategoryId } from "@/lib/types";
 
 
 const EmiliaRecipeBook = () => {
-  type View =
-  | "home"
-  | "categories"
-  | "recipes"
-  | "recipe"
-  | "stories"
-  | "story"
-  | "gallery";
 
 const [currentView, setCurrentView] = useState<View>("home");
 const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
