@@ -17,6 +17,7 @@ export type CategoryId =
 
 export type Recipe = {
   id: number;
+  slug: string;
   name: string;
   subtitle: string;
   category: CategoryId;

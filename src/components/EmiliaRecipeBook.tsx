@@ -6,6 +6,8 @@ import { recipes } from "@/lib/data/recipes";
 import { stories } from "@/lib/data/stories";
 import { photos } from "@/lib/data/photos";
 import type { View, Recipe, Story, CategoryId } from "@/lib/types";
+import Link from "next/link";
+
 
 
 const EmiliaRecipeBook = () => {
@@ -135,7 +137,12 @@ const categories: { id: CategoryId; name: string; icon: string; description: str
               <div className="p-4">
                 <h3 className="text-xl font-serif text-amber-900 mb-1">{recipe.name}</h3>
                 <p className="text-sm text-amber-700 mb-2">{recipe.subtitle}</p>
-                <button onClick={() => { setSelectedRecipe(recipe); setCurrentView('recipe'); }} className="w-full bg-amber-600 text-white py-2 rounded-lg hover:bg-amber-700">View Recipe</button>
+                <Link
+                  href={`/recipes/${recipe.slug}`}
+                  className="block w-full bg-amber-600 text-white py-2 rounded-lg hover:bg-amber-700 text-center"
+                >
+                  View Recipe
+                </Link>
               </div>
             </div>
           ))}

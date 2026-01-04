@@ -5,6 +5,7 @@ import type { Recipe } from "@/lib/types";
 export const recipes: Recipe[] = [
   {
     id: 1,
+    slug: "sarmale",
     name: "Sarmale",
     subtitle: "Stuffed cabbage like at Christmas",
     category: "mains",
@@ -39,6 +40,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: 2,
+    slug: "cozonac",
     name: "Cozonac",
     subtitle: "Sweet bread for celebrations",
     category: "breads",
@@ -73,6 +75,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: 3,
+    slug: "mamaliga-cu-branza",
     name: "Mamaliga cu Branza",
     subtitle: "Polenta with cheese",
     category: "sides",
@@ -101,6 +104,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: 4,
+    slug: "ciorba-de-burta",
     name: "Ciorba de Burta",
     subtitle: "Tripe soup with garlic sauce",
     category: "soups",
@@ -135,6 +139,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: 5,
+    slug: "salata-de-boeuf",
     name: "Salata de Boeuf",
     subtitle: "Romanian beef salad",
     category: "appetizers",
@@ -168,6 +173,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: 6,
+    slug: "papanasi",
     name: "Papanasi",
     subtitle: "Fried doughnuts with sweet cheese",
     category: "desserts",
