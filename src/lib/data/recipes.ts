@@ -118,7 +118,7 @@ export const recipes: Recipe[] = [
     id: 4,
     slug: "ciorba-de-burta",
     image: {
-    src: "/images/recipes/ciorba-de-burta.webp",
+    src: "/images/recipes/sarmale.webp",
     alt: "Ciorba de Burta (Tripe soup with garlic sauce)",
     },
     name: "Ciorba de Burta",
