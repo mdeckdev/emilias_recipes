@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter  } from "next/navigation";
 import { Book, Heart, Image as ImageIcon, ChefHat, Clock, Users, ArrowLeft } from "lucide-react";
 import { recipes } from "@/lib/data/recipes";
 import { stories } from "@/lib/data/stories";
@@ -14,15 +14,29 @@ import Image from "next/image";
 type View = "home" | "categories" | "recipes" | "stories" | "story" | "gallery";
 
 const EmiliaRecipeBook = () => {
-  const sp = useSearchParams();
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-  const currentView = (sp.get("view") ?? "home") as View;
-  const selectedCategory = (sp.get("cat") ?? null) as CategoryId | null;
+  const query = searchParams.get("q") ?? "";
 
-  const selectedStoryId = sp.get("id");
+  const currentView = (searchParams.get("view") ?? "home") as View;
+  const selectedCategory = (searchParams.get("cat") ?? null) as CategoryId | null;
+
+  function setQuery(next: string) {
+  const params = new URLSearchParams(searchParams.toString());
+
+  if (next) params.set("q", next);
+  else params.delete("q");
+
+  router.push(`/?${params.toString()}`);
+}
+
+
+  const selectedStoryId = searchParams.get("id");
   const selectedStory = selectedStoryId
     ? stories.find((s) => String(s.id) === selectedStoryId) ?? null
     : null;
+
 
   const categories: { id: CategoryId; name: string; icon: string; description: string }[] = [
     { id: "appetizers", name: "Aperitive", icon: "🥖", description: "Starters & Small Bites" },
@@ -150,9 +164,24 @@ const EmiliaRecipeBook = () => {
   }
 
   if (currentView === "recipes") {
-    const recipesToShow = selectedCategory
+    const recipesInCategory = selectedCategory
       ? recipes.filter((r) => r.category === selectedCategory)
       : [];
+
+    const recipesToShow = recipesInCategory.filter((r) => {
+      if (!query) return true;
+      const q = query.toLowerCase();
+
+      return (
+        r.name.toLowerCase().includes(q) ||
+        r.subtitle.toLowerCase().includes(q) ||
+        r.ingredients.some((ing) => ing.toLowerCase().includes(q))
+      );
+    });
+
+    const totalInCategory = recipesInCategory.length;
+    const showing = recipesToShow.length;
+
     const catInfo = selectedCategory ? categories.find((c) => c.id === selectedCategory) : null;
 
     return (
@@ -173,6 +202,24 @@ const EmiliaRecipeBook = () => {
         </div>
 
         <div className="p-4 max-w-2xl mx-auto space-y-4">
+            {/* 🔍 SEARCH INPUT — ADD THIS BLOCK */}
+            <div>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search recipes or ingredients…"
+                className="w-full rounded-lg border-2 border-amber-200 bg-white px-4 py-2 text-sm text-gray-900 placeholder:text-gray-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-300"
+              />
+            </div>
+            <div className="flex items-center justify-between text-xs">
+              <p className="text-gray-700">
+                {query
+                  ? `Showing ${showing} of ${totalInCategory} recipes for “${query}”`
+                  : `Showing ${showing} recipes`}
+              </p>
+            </div>
+
           {recipesToShow.map((recipe) => (
           <div
             key={recipe.id}
@@ -203,6 +250,17 @@ const EmiliaRecipeBook = () => {
             </div>
           ))}
 
+          
+
+          {recipesToShow.length === 0 && query && (
+            <div className="bg-white rounded-lg shadow-md p-4 border-2 border-amber-200 text-center">
+              <p className="text-sm text-gray-700 mb-2">
+                No recipes found for “{query}”.
+              </p>
+            </div>
+          )}
+
+          
           {!selectedCategory && (
             <div className="bg-white rounded-lg shadow-md p-4 border-2 border-amber-200 text-center">
               <p className="text-sm text-gray-700 mb-3">No category selected.</p>
