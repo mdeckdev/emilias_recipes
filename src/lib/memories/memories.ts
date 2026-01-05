@@ -32,7 +32,7 @@ export const MEMORIES: Memory[] = [
     year: 2025,
     monthLabel: "December",
     story: "Placeholder story. Add real story later.",
-    photos: [{ src: "/photos/priki.webp", alt: "Priki" }],
+    photos: [{ src: "/photos/priki.webp", alt: "Priki" },{ src: "/photos/priki-2.webp", alt: "Priki" }],
   },
 ];
 
