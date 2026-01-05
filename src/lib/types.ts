@@ -3,9 +3,7 @@ export type View =
   | "categories"
   | "recipes"
   | "recipe"
-  | "stories"
-  | "story"
-  | "gallery";
+  | "story";
 
 export type CategoryId =
   | "appetizers"

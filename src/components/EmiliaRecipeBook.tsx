@@ -15,7 +15,7 @@ import { useFavorites } from "@/lib/favorites";
 
 
 
-type View = "home" | "categories" | "recipes" | "stories" | "story" | "gallery" | "favorites";
+type View = "home" | "categories" | "recipes" | "story" | "favorites";
 
 const EmiliaRecipeBook = () => {
   const searchParams = useSearchParams();
@@ -25,7 +25,12 @@ const EmiliaRecipeBook = () => {
 
   const query = searchParams.get("q") ?? "";
 
-  const currentView = (searchParams.get("view") ?? "home") as View;
+  const rawView = searchParams.get("view");
+  const allowedViews: View[] = ["home", "categories", "recipes", "story", "favorites"];
+  const currentView: View = allowedViews.includes(rawView as View)
+    ? (rawView as View)
+    : "home";
+
   const selectedCategory = (searchParams.get("cat") ?? null) as CategoryId | null;
 
   function setQuery(next: string) {
@@ -109,7 +114,7 @@ const EmiliaRecipeBook = () => {
               </div>
             </Link> 
             <Link
-              href="/?view=stories"
+              href="/memories"
               className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-amber-200 block"
             >
               <div className="flex items-center gap-4">
@@ -117,25 +122,12 @@ const EmiliaRecipeBook = () => {
                   <BookHeart size={32} className="text-amber-600" />
                 </div>
                 <div className="text-left flex-1">
-                  <h3 className="text-xl font-serif text-amber-900 mb-1">Family Stories</h3>
-                  <p className="text-sm text-gray-600">Memories from the kitchen</p>
+                  <h3 className="text-xl font-serif text-amber-900 mb-1">Memories</h3>
+                  <p className="text-sm text-gray-600">Stories and photos by year</p>
                 </div>
               </div>
             </Link>
-            <Link
-              href="/?view=gallery"
-              className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-2 border-amber-200 block"
-            >
-              <div className="flex items-center gap-4">
-                <div className="bg-orange-100 p-4 rounded-full">
-                  <ImageIcon size={32} className="text-orange-600" />
-                </div>
-                <div className="text-left flex-1">
-                  <h3 className="text-xl font-serif text-amber-900 mb-1">Photo Gallery</h3>
-                  <p className="text-sm text-gray-600">Treasures from the past</p>
-                </div>
-              </div>
-            </Link>
+            
           </div>
         </div>
       </div>
@@ -393,44 +385,6 @@ const EmiliaRecipeBook = () => {
   }
 
 
-  if (currentView === "stories") {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50">
-        <div className="bg-gradient-to-r from-amber-100 to-orange-100 p-6 shadow-lg">
-          <Link href="/" className="flex items-center gap-2 text-amber-800 mb-4">
-            <ArrowLeft size={20} />
-            Back
-          </Link>
-          <h1 className="text-2xl font-serif text-amber-900">Family Stories</h1>
-        </div>
-
-        <div className="p-4 max-w-2xl mx-auto space-y-4">
-          {stories.map((story) => (
-            <div
-              key={story.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200"
-            >
-              <div className="flex items-center justify-center h-32 bg-gradient-to-br from-orange-50 to-amber-50">
-                <div className="text-5xl">{story.image}</div>
-              </div>
-              <div className="p-4">
-                <h3 className="text-xl font-serif text-amber-900 mb-1">{story.title}</h3>
-                <p className="text-sm text-amber-700 mb-3">{story.date}</p>
-                <p className="text-sm text-gray-600 mb-4">{story.content}</p>
-                <Link
-                  href={`/?view=story&id=${story.id}`}
-                  className="block w-full bg-amber-600 text-white py-2 rounded-lg hover:bg-amber-700 text-center"
-                >
-                  Read Story
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   if (currentView === "story") {
     if (!selectedStory) {
       return (
@@ -469,51 +423,6 @@ const EmiliaRecipeBook = () => {
       </div>
     );
   }
-
-
-  if (currentView === "gallery") {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50">
-        <div className="bg-gradient-to-r from-amber-100 to-orange-100 p-6 shadow-lg">
-          <Link href="/" className="flex items-center gap-2 text-amber-800 mb-4">
-            <ArrowLeft size={20} />
-            Back
-          </Link>
-          <h1 className="text-2xl font-serif text-amber-900">Photo Gallery</h1>
-        </div>
-
-        <div className="p-4 max-w-2xl mx-auto">
-          <div className="grid grid-cols-2 gap-4">
-        {photos.map((photo) => (
-          <div
-            key={photo.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200"
-          >
-            <div className="relative aspect-square bg-gradient-to-br from-orange-50 to-amber-50">
-              <Image
-                src={photo.image.src}   // ← THIS is the binding
-                alt={photo.image.alt}
-                fill
-                sizes="(max-width: 768px) 50vw, 300px"
-                className="object-cover"
-                loading="lazy"
-              />
-            </div>
-
-            <div className="p-3">
-              <p className="text-sm font-serif text-amber-900 mb-1">{photo.title}</p>
-              <p className="text-xs text-amber-700 mb-1">{photo.year}</p>
-              <p className="text-xs text-gray-600">{photo.description}</p>
-            </div>
-          </div>
-        ))}
-
-          </div>
-        </div>
-      </div>
-    );
-  }
-
 
   return null;
 };
