@@ -484,21 +484,30 @@ const EmiliaRecipeBook = () => {
 
         <div className="p-4 max-w-2xl mx-auto">
           <div className="grid grid-cols-2 gap-4">
-            {photos.map((photo) => (
-              <div
-                key={photo.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200"
-              >
-                <div className="aspect-square bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center">
-                  <div className="text-4xl">📷</div>
-                </div>
-                <div className="p-3">
-                  <p className="text-sm font-serif text-amber-900 mb-1">{photo.title}</p>
-                  <p className="text-xs text-amber-700 mb-1">{photo.year}</p>
-                  <p className="text-xs text-gray-600">{photo.description}</p>
-                </div>
-              </div>
-            ))}
+        {photos.map((photo) => (
+          <div
+            key={photo.id}
+            className="bg-white rounded-lg shadow-md overflow-hidden border-2 border-amber-200"
+          >
+            <div className="relative aspect-square bg-gradient-to-br from-orange-50 to-amber-50">
+              <Image
+                src={photo.image.src}   // ← THIS is the binding
+                alt={photo.image.alt}
+                fill
+                sizes="(max-width: 768px) 50vw, 300px"
+                className="object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <div className="p-3">
+              <p className="text-sm font-serif text-amber-900 mb-1">{photo.title}</p>
+              <p className="text-xs text-amber-700 mb-1">{photo.year}</p>
+              <p className="text-xs text-gray-600">{photo.description}</p>
+            </div>
+          </div>
+        ))}
+
           </div>
         </div>
       </div>

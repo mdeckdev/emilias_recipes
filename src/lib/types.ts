@@ -47,4 +47,8 @@ export type Photo = {
   title: string;
   year: string;
   description: string;
+  image: {
+    src: string;
+    alt: string;
+  };
 };
