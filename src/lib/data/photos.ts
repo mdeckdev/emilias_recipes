@@ -41,4 +41,26 @@ export const photos: Photo[] = [
       alt: "Harvesting vegetables from the garden",
     },
   },
+  {
+    id: 5,
+    title: "Jugando con Priki",
+    year: "2025",
+    description: "Isabella y Priki jugando mienstras abuelo y mama miran",
+    image: {
+      src: "/photos/priki.webp",
+      alt: "Jugando con Priki",
+    },
+  },
+  {
+    id: 6,
+    title: "New Years 2025",
+    year: "2025",
+    description: "Los abuelos posando para la foto de año nuevo",
+    image: {
+      src: "/photos/new-years-eve-2025.webp",
+      alt: "Los abuelos posando para la foto de año nuevo",
+    },
+  },
+
+
 ];
