@@ -1,15 +1,14 @@
 export type MemoryPhoto = {
-  // We'll add real paths later. For now keep optional.
-  src?: string;
-  alt?: string;
+  src: string; // must be a path under /public, e.g. "/photos/xxx.webp"
+  alt: string;
 };
 
 export type Memory = {
   slug: string;
   title: string;
-  dateISO: string; // e.g. "2025-12-31"
+  dateISO: string;
   year: number;
-  monthLabel: string; // e.g. "December"
+  monthLabel: string;
   story?: string;
   photos: MemoryPhoto[];
 };
@@ -22,7 +21,9 @@ export const MEMORIES: Memory[] = [
     year: 2025,
     monthLabel: "December",
     story: "Placeholder story. We’ll connect the story drawer later.",
-    photos: [{}, {}, {}, {}, {}, {}],
+    photos: [
+      { src: "/photos/new-years-eve-2025.webp", alt: "New Year’s Eve 2025" },
+    ],
   },
   {
     slug: "priki",
@@ -31,9 +32,10 @@ export const MEMORIES: Memory[] = [
     year: 2025,
     monthLabel: "December",
     story: "Placeholder story. Add real story later.",
-    photos: [{}, {}, {}],
+    photos: [{ src: "/photos/priki.webp", alt: "Priki" }],
   },
 ];
+
 
 export function getMemoryBySlug(slug: string): Memory | undefined {
   return MEMORIES.find((m) => m.slug === slug);

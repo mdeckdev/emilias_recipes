@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import BackButton from "@/components/BackButton";
 import { getMemoryBySlug } from "@/lib/memories/memories";
+import Image from "next/image";
+
 
 export const metadata = {
   title: "Memory",
@@ -40,15 +42,25 @@ export default async function MemoryPage({
         <div className="rounded-lg border p-4">
           <div className="text-sm font-medium">Photos (placeholder)</div>
           <div className="mt-3 grid grid-cols-3 gap-3">
-            {memory.photos.map((_, i) => (
-              <Link
+            {memory.photos.map((p, i) => (
+                <Link
                 key={i}
                 href={`/memories/${memory.slug}/photo/${i}`}
-                className="aspect-square rounded-md border bg-black/5 hover:bg-black/10"
+                className="relative aspect-square overflow-hidden rounded-md border bg-black/5 hover:bg-black/10"
                 aria-label={`Open photo ${i + 1}`}
-              />
+                >
+                <Image
+                    src={p.src}
+                    alt={p.alt}
+                    fill
+                    sizes="(max-width: 768px) 33vw, 200px"
+                    className="object-cover"
+                    priority={i === 0}
+                />
+                </Link>
             ))}
-          </div>
+            </div>
+
         </div>
       </section>
     </main>
