@@ -1,0 +1,51 @@
+import Link from "next/link";
+import BackButton from "@/components/BackButton";
+
+export const metadata = {
+  title: "Memory",
+};
+
+export default async function MemoryPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  return (
+    <main className="mx-auto max-w-3xl p-6">
+      <header className="mb-6 flex items-center gap-3">
+        <BackButton label="Memories" />
+        <div>
+          <h1 className="text-2xl font-semibold">Memory: {slug}</h1>
+          <p className="mt-1 text-sm text-black/60">
+            Scaffold view (memory detail). Add real content/photos later.
+          </p>
+        </div>
+      </header>
+
+      <section className="space-y-4">
+        <div className="rounded-lg border p-4">
+          <div className="text-sm font-medium">Story (placeholder)</div>
+          <p className="mt-2 text-sm text-black/60">
+            This is where the story summary/drawer trigger will live.
+          </p>
+        </div>
+
+        <div className="rounded-lg border p-4">
+          <div className="text-sm font-medium">Photos (placeholder)</div>
+          <div className="mt-3 grid grid-cols-3 gap-3">
+            {[0, 1, 2, 3, 4, 5].map((i) => (
+              <Link
+                key={i}
+                href={`/memories/${slug}/photo/${i}`}
+                className="aspect-square rounded-md border bg-black/5 hover:bg-black/10"
+                aria-label={`Open photo ${i + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
